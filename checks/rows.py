@@ -68,7 +68,20 @@ for d in range(5, 21):
 for d in range(6, 12):
     for q in range(1, 100 * d):
         assert closed_form(d, q) * (1 if 2 * q <= 5 * d - 3 else -1) > 0, (d, q)
-print(f"Proposition 4.1 and Theorem 1.3: closed form matches {count} values; rows 6 <= d <= 11, q < 100d have the stated sign: ok")
+# terms of T as {(power of q, power of d): coefficient}; |T| <= (sum of |coefficients|) d^3 q^6 for d, q >= 1
+T_terms = {(6, 3): 1, (6, 2): -3, (6, 1): 2, (5, 3): 1, (5, 2): -12, (5, 1): 11, (4, 3): -19, (4, 2): 18, (4, 1): 19,
+           (3, 3): 26, (3, 2): 18, (3, 1): 4, (3, 0): -6, (2, 2): 36, (2, 1): 12, (2, 0): -6, (1, 1): 18, (1, 0): -6,
+           (0, 0): -6}
+for d in range(5, 21):
+    for q in range(1, 36):
+        T = sum(c * q ** i * d ** j for (i, j), c in T_terms.items())
+        assert 6 * (1 + q) ** d * (-1 + 4 * d * q + (d + 5 * (d * (d - 1) // 2)) * q * q - d * q ** 3) + (q - 1) * T \
+            == closed_form(d, q)
+abs_sum = sum(abs(c) for c in T_terms.values())
+assert abs_sum == 224
+assert F(abs_sum, 6) * F(144, 4096) < 3 and F(abs_sum, 3) < 75
+print(f"Proposition 4.1 and Theorem 1.3: closed form matches {count} values; rows 6 <= d <= 11, q < 100d have the stated sign; "
+      f"|(q-1)T| <= {abs_sum} d^3 q^7: ok")
 
 
 # 3. low dimensions: d! [t^k] L_d(t)

@@ -54,7 +54,7 @@ about fifteen seconds. It runs:
   convolution formula of Section 2, and direct lattice-point counts),
   including Graham's $L_5$ for $r=14$.
 - `rows.py`: the large-base signs (Theorem 1.2) for $d\le16$, the
-  codimension-four formula and its finite rows (Theorem 1.3), the formulas for
+  codimension-four formula, its finite rows and the bound in its proof (Theorem 1.3), the formulas for
   $d\le5$, and the first-failure table.
 - `bases_2_3.py`: the generating functions and coefficient facts for $r=2,3$
   (Section 6).
@@ -65,7 +65,7 @@ about fifteen seconds. It runs:
 
 The output is in [`checks/output.txt`](checks/output.txt).
 `codim4_symbolic.py` (needs `sympy`, a few minutes) derives the
-codimension-four formula of Proposition 4.1 symbolically in $r$ and $d$. The
+codimension-four formula of Proposition 4.1 symbolically in $q=r-1$ and $d$. The
 PDF builds with Tectonic (`cd paper && tectonic main.tex`) or `pdflatex`.
 
 ## License

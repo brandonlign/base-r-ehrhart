@@ -374,14 +374,14 @@ $2q$ and $5d-3$ are integers, and $q\ge14$ because $D\ge27/2$; hence
 $P\le-\frac12dq^2+4dq-1\le-3dq$. In both cases $|P|\ge3dq$, and $P$ has the
 sign claimed for $A_{d,4}$. It remains to prove that $|(q-1)T|<6(1+q)^d|P|$.
 
-Replacing each coefficient of $T$ by its absolute value and using $d\ge1$ and
-$q\ge1$ yields $|(q-1)T|\le219\,d^3q^7$.
+Since $|q-1|<q$, bounding each term of $T$ by its absolute value and using
+$d\ge1$ and $q\ge1$ yields $|(q-1)T|\le224\,d^3q^7$.
 
 \emph{Case $d\ge12$.} The function $q^6/(1+q)^d$ decreases for $q\ge1$ because
 $6(1+q)\le dq$. Since $d^2/2^d$ decreases for $d\ge3$, we obtain
 \[
- \frac{|(q-1)T|}{6(1+q)^d\cdot dq}\le\frac{219}{6}\,d^2\,\frac{q^6}{(1+q)^d}
- \le\frac{219}{6}\cdot\frac{d^2}{2^d}\le\frac{219}{6}\cdot\frac{144}{4096}<3.
+ \frac{|(q-1)T|}{6(1+q)^d\cdot dq}\le\frac{224}{6}\,d^2\,\frac{q^6}{(1+q)^d}
+ \le\frac{224}{6}\cdot\frac{d^2}{2^d}\le\frac{224}{6}\cdot\frac{144}{4096}<3.
 \]
 Therefore $|(q-1)T|<6(1+q)^d\cdot3dq\le6(1+q)^d|P|$.
 
@@ -389,9 +389,9 @@ Therefore $|(q-1)T|<6(1+q)^d\cdot3dq\le6(1+q)^d|P|$.
 $q-D\ge q-\frac52d\ge\frac{39}{40}q$, so
 $|P|\ge\frac{39}{40}dq^3-4dq\ge\frac12dq^3$. Using $(1+q)^d\ge q^6$, we get
 \[
- \frac{|(q-1)T|}{6(1+q)^d}\le\frac{219}{6}d^3q<\frac12dq^3\le|P|,
+ \frac{|(q-1)T|}{6(1+q)^d}\le\frac{224}{6}d^3q<\frac12dq^3\le|P|,
 \]
-because $q^2\ge10^4d^2>73d^2$.
+because $q^2\ge10^4d^2>75d^2$.
 
 \emph{Case $6\le d\le11$ and $q<100d$.} Only finitely many pairs remain. For
 each one, \texttt{rows.py} evaluates $X$ exactly and confirms its sign.
@@ -777,7 +777,8 @@ direct lattice-point counts, comparing them on 447 values, including Graham's
 $L_5$ for $r=14$.
 \item \texttt{rows.py}: verifies the signs in Theorem~\ref{thm:large} for
 $d\le16$, the formula~\eqref{eq:codim4} for $5\le d\le20$ and $q\le35$, the
-finite cases of Theorem~\ref{thm:codim4}, the formulas for $d\le5$,
+finite cases of Theorem~\ref{thm:codim4} and the constant $224$ in its proof,
+the formulas for $d\le5$,
 Table~\ref{tab:first}, and the coefficient $(5-2c)/(1440c^2)$.
 \item \texttt{bases\_2\_3.py}: checks the generating functions of
 Section~\ref{sec:23} for $d\le14$ and the coefficient bounds used there
