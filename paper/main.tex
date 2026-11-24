@@ -1,0 +1,752 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Res}{\operatorname{Res}}
+
+\title{Ehrhart positivity of base-$r$ simplices}
+\author{Brandon Li}
+\address{Great Neck, New York, USA}
+\email{brandon.li.gn@gmail.com}
+\subjclass[2020]{52B20, 05A15, 11B68}
+\keywords{Ehrhart polynomial, Ehrhart positivity, lattice simplex, numeral system, generating function}
+
+\begin{document}
+\begin{abstract}
+For an integer $r\ge2$, the base-$r$ simplex $B_{r,d}$ is the convex hull of
+the standard basis vectors of $\R^d$ and the point $-(r-1)(1,r,\ldots,r^{d-1})$.
+Solus conjectured that every $B_{r,d}$ is Ehrhart positive, and Graham
+showed that $B_{14,5}$ is not. We prove that $B_{r,d}$ is Ehrhart positive in
+every dimension exactly when $r\in\{2,3,4,5\}$, and for each $r\ge6$ we give
+the first dimension with a negative coefficient. We also determine the
+eventual signs of all coefficients at fixed dimension and large base, find
+the exact sign change of the coefficient in codimension four, at
+$r-1=(5d-3)/2$, and show that coefficients in fixed codimension are
+eventually positive at fixed base. The proofs combine a generating function
+for the Ehrhart polynomials, a residue formula over the $(r-1)$st roots of
+unity, and, for bases four and five, Lagrange inversion with explicit
+analytic tail bounds.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+For an integer $r\ge2$ and $d\ge1$ put $q=r-1$ and
+\[
+ B_{r,d}=\operatorname{conv}\bigl(e_1,\ldots,e_d,\;-q(1,r,r^2,\ldots,r^{d-1})\bigr)\subset\R^d .
+\]
+This is a $d$-dimensional lattice simplex. Write
+$L_d(t)=\#\bigl(tB_{r,d}\cap\Z^d\bigr)$ for its Ehrhart polynomial; the base $r$
+will always be clear from the context. Solus~\cite{Sol} introduced these
+simplices through base-$r$ numeral systems, computed their $h^*$-polynomials,
+and proved that they are real-rooted. He also observed that computations
+suggested that the simplices are Ehrhart positive, that is, that every
+coefficient of $L_d(t)$ is positive. Liu recorded this as a conjecture of
+Solus in her survey~\cite{Liu}, and Liu and Solus~\cite[Conjecture~2.2]{LS}
+stated it for all $r\ge2$ and $d\ge1$. Graham~\cite{Gra} showed that the
+conjecture is false:
+\[
+ L_5(t)=1-\tfrac{268}{15}t+\tfrac{3955}{12}t^2+\tfrac{5833}{2}t^3
+ +\tfrac{10343}{12}t^4+\tfrac{67228}{15}t^5\qquad(r=14).
+\]
+This leaves the question of which bases are Ehrhart positive and how the
+negative coefficients are distributed. We answer the first part completely.
+
+\begin{theorem}\label{thm:classification}
+The simplex $B_{r,d}$ is Ehrhart positive for every $d\ge1$ if and only if
+$r\in\{2,3,4,5\}$. For $r\ge6$ the least dimension $d$ in which $L_d(t)$ has a
+negative coefficient is given in Table~\ref{tab:first}; in that dimension the
+negative coefficient is the linear one.
+\end{theorem}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+$r$ & $6$ & $7$ & $8$ & $9,\ldots,13$ & $\ge14$\\
+\midrule
+first $d$ with a negative coefficient & $43$ & $19$ & $15$ & $7$ & $5$\\
+\bottomrule
+\end{tabular}
+\caption{The first failure of Ehrhart positivity for $B_{r,d}$, $r\ge6$.}
+\label{tab:first}
+\end{table}
+
+For $r=2$ the result is known: the $h^*$-polynomial of $B_{2,d}$ is
+$(1+z)^d$~\cite{Sol}, the same as that of the $d$-dimensional
+cross-polytope, so the two have the same Ehrhart polynomial, and the zeros of
+the latter lie on the line $\operatorname{Re}t=-1/2$~\cite{BCKV}. Section~\ref{sec:23}
+gives a short direct proof for $r=2$ and $r=3$. The proof for $r=4$ and $r=5$
+in Section~\ref{sec:45} is the main part of the paper.
+
+The signs of the coefficients are governed by the codimension $d-k$ of the
+coefficient of $t^k$. When the base is large compared with the dimension a
+periodic pattern appears.
+
+\begin{theorem}\label{thm:large}
+Fix $d\ge1$. For all sufficiently large $r$, the coefficient of $t^k$ in
+$L_d(t)$, $0\le k\le d$, is negative if and only if
+\[
+ k\ge1,\qquad d-k\ge4,\qquad d-k\equiv0\text{ or }1\pmod4,
+\]
+and is positive otherwise.
+\end{theorem}
+
+The first negative coefficient appears in codimension four, and for it the
+transition is exact.
+
+\begin{theorem}\label{thm:codim4}
+Let $q=r-1$. For $d\ge6$, the coefficient of $t^{d-4}$ in $L_d(t)$ is negative
+if $q>(5d-3)/2$ and positive if $q\le(5d-3)/2$. For $d=5$ it is negative if and
+only if $r\ge14$. For $d\le4$ and every $r\ge2$, all coefficients of $L_d(t)$
+are positive.
+\end{theorem}
+
+At a fixed base, on the other hand, negative coefficients cannot persist in
+fixed codimension. For $0\le\ell\le d$ let
+\[
+ A_{d,\ell}=(d-\ell)!\,[t^{d-\ell}]\,L_d(t).
+\]
+
+\begin{theorem}\label{thm:fixed}
+Fix $\ell\ge0$.
+\begin{enumerate}
+\item If $r\to\infty$ and $d\to\infty$ with $r/d\to c\in(0,\infty)$, then
+\[
+ r^{-d}A_{d,\ell}\longrightarrow[v^\ell]\exp\Bigl(\frac{(v/2)\coth(v/2)-1}{c}\Bigr).
+\]
+For odd $\ell$ the limit is $0$, and $r^{1-d}A_{d,\ell}\to\frac12[v^{\ell-1}]\exp\bigl(((v/2)\coth(v/2)-1)/c\bigr)$.
+\item For each fixed $r\ge2$, $A_{d,\ell}>0$ for all sufficiently large $d$.
+\end{enumerate}
+\end{theorem}
+
+Since $(v/2)\coth(v/2)=1+v^2/12-v^4/720+O(v^6)$, the coefficient of $v^4$ in
+the limit in~(1) is $(5-2c)/(1440c^2)$. It changes sign at $c=5/2$, in
+agreement with Theorem~\ref{thm:codim4}.
+
+\subsection*{Outline}
+Section~\ref{sec:gf} writes $L_d(t)$ as the coefficient of $x^{qt}$ in an
+explicit rational function and, by residues, as a sum over the $q$th roots of
+unity. Theorem~\ref{thm:large} follows from the leading terms in $q$
+(Section~\ref{sec:large}), Theorem~\ref{thm:codim4} from an exact formula for
+$A_{d,4}$ (Section~\ref{sec:codim4}), and Theorem~\ref{thm:fixed} from the
+principal root (Section~\ref{sec:fixed}). For the bases $2,3,4,5$ we sum over
+the dimension. The result is a finite sum $\sum_\zeta b_\zeta(z)e^{tv_\zeta(z)}$
+over the branches of an algebraic function. For $r=2,3$ every coefficient
+of the principal branch is positive and the other branch has nonnegative
+coefficients (Section~\ref{sec:23}). For $r=4,5$ we prove that the principal
+branch dominates. The first $180$ or $900$ coefficients of every branch come
+from an exact computation with Lagrange inversion; the rest are bounded by
+Cauchy estimates on a disk of radius $9/8$ or $51/50$ (Section~\ref{sec:45}).
+Theorem~\ref{thm:classification} is assembled in Section~\ref{sec:classification}.
+
+\section{Generating functions}\label{sec:gf}
+
+Let $S_j(x)=1+x+\cdots+x^j$. Solus~\cite{Sol} showed that the $h^*$-polynomial
+of $B_{r,d}$ is obtained from $S_q(x)^d=\sum_e c_ex^e$ by replacing each
+$x^e$ with $z^{\lceil e/q\rceil}$:
+\[
+ h^*(z)=\sum_{e\ge0}c_e\,z^{\lceil e/q\rceil}.
+\]
+
+\begin{lemma}\label{lem:gf}
+For all integers $t\ge0$,
+\begin{equation}\label{eq:gf}
+ L_d(t)=[x^{qt}]\,F_d(x),\qquad
+ F_d(x)=\frac{1}{1-x}\Bigl(\frac{S_q(x)}{1-x^q}\Bigr)^{d}
+ =\frac1{1-x}\Bigl(\frac1{1-x}+\frac{x^q}{1-x^q}\Bigr)^{d}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By definition of $h^*$, $L_d(t)=\sum_j h^*_j\binom{t-j+d}{d}$, with
+$\binom{n}{d}=0$ for $0\le n<d$. Write each exponent $e>0$ as $e=qj-s$
+with $j=\lceil e/q\rceil$ and $0\le s<q$, and $e=0$ as $j=s=0$. Let
+$G(x)=S_{q-1}(x)(1-x^q)^{-d-1}$. Then $[x^{qm+s}]G=\binom{m+d}{d}$ for
+$m\ge0$ and $0\le s<q$, so $[x^{qt-e}]G=\binom{t-j+d}{d}$ whenever
+$e\le qt$. When $e>qt$ both sides vanish: $j>t$, and $j\le d$
+gives $0\le t-j+d<d$. Hence $L_d(t)=[x^{qt}]S_q(x)^dG(x)$, and
+$S_{q-1}(x)/(1-x^q)=1/(1-x)$ gives~\eqref{eq:gf}. The second form uses
+$1/(1-x)+x^q/(1-x^q)=S_q(x)/(1-x^q)$.
+\end{proof}
+
+Expanding the $d$th power in the second form of~\eqref{eq:gf} by the binomial
+theorem and extracting coefficients gives
+\begin{equation}\label{eq:conv}
+ L_d(t)=\binom{qt+d}{d}+\sum_{j=1}^{d}\binom dj\sum_{u=0}^{t-1}
+ \binom{t-u-1}{j-1}\binom{qu+d-j}{d-j}.
+\end{equation}
+Here $\binom{n}{k}$ with $n\ge0$ is the polynomial $n(n-1)\cdots(n-k+1)/k!$
+of $n$, which vanishes for $0\le n<k$. By Faulhaber's formula the right side
+is a polynomial in $(q,t)$, of degree at most $d$ in $q$. Hence each
+coefficient $[t^k]L_d(t)$ is a polynomial in $q$ of degree at most $d$.
+
+For a $q$th root of unity $\zeta$ put
+\[
+ a_\zeta(v)=\frac{1}{1-\zeta e^{-v/q}},\qquad b(v)=\frac{1}{e^v-1}.
+\]
+
+\begin{lemma}\label{lem:residue}
+For $0\le\ell\le d$,
+\[
+ A_{d,\ell}=[v^\ell]\sum_{\zeta^q=1}\frac vq\,a_\zeta(v)\bigl(v(a_\zeta(v)+b(v))\bigr)^d .
+\]
+\end{lemma}
+
+\begin{proof}
+Fix an integer $t\ge0$. The coefficient $[x^{qt}]F_d$ is the residue of
+$F_d(x)x^{-qt-1}$ at $x=0$. The other poles are the points $x=\zeta$ with
+$\zeta^q=1$, and $\infty$. As $x\to\infty$, $F_d(x)=O(x^{-1})$, so the
+residue at infinity is zero and $[x^{qt}]F_d=-\sum_\zeta\Res_{x=\zeta}$.
+Substitute $x=\zeta e^{-v/q}$, so that $dx=-(x/q)\,dv$,
+$1/(1-x)=a_\zeta(v)$, $x^q/(1-x^q)=b(v)$ and $x^{-qt}=e^{tv}$. This gives
+\[
+ -\Res_{x=\zeta}F_d(x)x^{-qt-1}
+ =\frac1q[v^{-1}]\,a_\zeta(a_\zeta+b)^de^{tv}
+ =[v^{d}]\,\frac vq a_\zeta\bigl(v(a_\zeta+b)\bigr)^de^{tv}.
+\]
+The last expression is a polynomial in $t$, and its coefficient of $t^{d-\ell}$
+is $[v^\ell]\frac vq a_\zeta(v(a_\zeta+b))^d/(d-\ell)!$. Both sides of the
+lemma are polynomials in $t$ that agree for all integers $t\ge0$.
+\end{proof}
+
+At the principal root $\zeta=1$,
+\begin{equation}\label{eq:principal}
+ \frac vq a_1(v)=1+\frac{v}{2q}+\frac{v^2}{12q^2}+\cdots,\qquad
+ v\bigl(a_1(v)+b(v)\bigr)=(q+1)\Bigl(1+\frac{v^2}{12q}+O(v^4)\Bigr).
+\end{equation}
+At every other root, $v\,a_\zeta(v)=O(v)$ and $v(a_\zeta+b)=1+O(v)$. So the
+principal term carries the factor $(q+1)^d=r^d$, and the other terms are
+polynomials in $d$.
+
+\section{Large base: proof of Theorem~\ref{thm:large}}\label{sec:large}
+
+By Section~\ref{sec:gf}, $[t^k]L_d$ is a polynomial in $q$ of degree at most
+$d$. Its sign for large $q$ is the sign of its leading coefficient, which we
+read off from~\eqref{eq:conv}. Let $S_n(t)=\sum_{u=0}^{t-1}u^n$, so that
+\[
+ (n+1)S_n(t)=\sum_{i=0}^{n}\binom{n+1}{i}B_it^{n+1-i},
+\]
+with Bernoulli numbers $B_0=1$, $B_1=-1/2$, $B_2=1/6$, and so on. Recall that
+$B_i=0$ for odd $i\ge3$ and that $B_{2a}$ has sign $(-1)^{a+1}$ for $a\ge1$.
+
+The only contribution to $q^d$ is $q^dt^d/d!$, from $j=0$. The contributions
+to $q^{d-1}$ come from $j=0$ and $j=1$:
+\[
+ (d-1)!\,[q^{d-1}]L_d(t)=\frac{d+1}2t^{d-1}+dS_{d-1}(t)
+ =t^d+\frac12t^{d-1}+\sum_{i=2}^{d-1}\binom diB_it^{d-i}.
+\]
+So for $k=d$ and $k=d-1$ the leading coefficient is positive. For an even
+codimension $d-k=i\ge2$ with $k\ge1$, the leading coefficient is
+$\binom diB_i/(d-1)!$, with the sign $(-1)^{i/2+1}$ of $B_i$: positive for
+$i\equiv2$ and negative for $i\equiv0\pmod 4$.
+
+For an odd codimension $d-k=i\ge3$ the coefficient of $q^{d-1}t^k$ vanishes,
+and we go to $q^{d-2}$. Put $n=d-2$. In~\eqref{eq:conv}, $j=0$ contributes
+only a multiple of $t^{d-2}$ to $q^{d-2}$. The term $j=1$ contributes
+$d\cdot\frac{d(d-1)}{2}S_n(t)/(d-1)!$, and $j=2$ contributes
+$\binom d2\bigl((t-1)S_n(t)-S_{n+1}(t)\bigr)/n!$. Together,
+\[
+ [q^{d-2}]L_d(t)=\frac{d}{2\,n!}\Bigl(S_n(t)+(d-1)\bigl(tS_n(t)-S_{n+1}(t)\bigr)\Bigr)
+ +c\,t^{d-2}
+\]
+for some constant $c$. Take $k=d-i$ with $i=2a+1\ge3$ and $k\ge1$. The
+coefficient of $t^k$ in $S_n$ involves $B_{i-1}=B_{2a}$, while those of
+$tS_n$ and $S_{n+1}$ involve $B_i=0$. Hence the leading coefficient is
+$\frac{d}{2\,n!}\binom{d-1}{2a}\frac{B_{2a}}{d-1}$. Its sign is $(-1)^{a+1}$,
+positive for $i\equiv3$ and negative for $i\equiv1\pmod4$.
+
+Finally the constant term is $L_d(0)=1$. Collecting the cases, the negative
+coefficients for large $q$ are those with $k\ge1$ and $d-k\in\{4,5,8,9,12,13,\ldots\}$.
+\qed
+
+\section{Codimension four: proof of Theorem~\ref{thm:codim4}}\label{sec:codim4}
+
+\begin{proposition}\label{prop:codim4}
+For all $d\ge1$ and $q\ge1$,
+\begin{equation}\label{eq:codim4}
+ 4320\,q^4A_{d,4}=6(1+q)^dP+(q-1)T,
+\end{equation}
+where
+\begin{align*}
+P={}&-1+4dq+\Bigl(d+5\binom d2\Bigr)q^2-dq^3,\\
+T={}&d(d-1)(d-2)q^6+d(d-1)(d-11)q^5+(-19d^3+18d^2+19d)q^4\\
+ &+(26d^3+18d^2+4d-6)q^3+(36d^2+12d-6)q^2+(18d-6)q-6.
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+We expand Lemma~\ref{lem:residue} with $\ell=4$. By~\eqref{eq:principal}, the
+term $\zeta=1$ is $(1+q)^d[v^4]\,U(1+w)^d$ with $U=\frac vqa_1$ and
+$1+w=v(a_1+b)/(q+1)$. Expanding $(1+w)^d=\exp(d\log(1+w))$ to order $v^4$
+gives $6(1+q)^dP/(4320q^4)$.
+
+For $\zeta\ne1$ put $\alpha=1/(1-\zeta)$. Then $\frac vqa_\zeta$ and
+$v(a_\zeta+b)-1$ are power series in $v$ whose coefficient of $v^k$ is a
+polynomial in $\alpha$ of degree at most $k$:
+\begin{align*}
+ \frac vqa_\zeta&=\frac{\alpha}{q}v+\frac{\alpha-\alpha^2}{q^2}v^2
+ +\frac{\alpha-3\alpha^2+2\alpha^3}{2q^3}v^3
+ +\frac{\alpha-7\alpha^2+12\alpha^3-6\alpha^4}{6q^4}v^4+\cdots,\\
+ v(a_\zeta+b)-1&=\Bigl(\alpha-\frac12\Bigr)v+\Bigl(\frac{\alpha-\alpha^2}{q}+\frac1{12}\Bigr)v^2
+ +\frac{\alpha-3\alpha^2+2\alpha^3}{2q^2}v^3\\
+ &\quad+\Bigl(\frac{\alpha-7\alpha^2+12\alpha^3-6\alpha^4}{6q^3}-\frac1{720}\Bigr)v^4+\cdots.
+\end{align*}
+So $[v^4]\frac vqa_\zeta(v(a_\zeta+b))^d$ is a polynomial in $\alpha$ of
+degree at most $4$, with coefficients polynomial in $d$ and $1/q$. The power
+sums $p_k=\sum_{\zeta\ne1}\alpha^k$ follow from
+\[
+ \frac{d}{ds}\log\frac{(1+s)^q-1}{s}=\sum_{\zeta\ne1}\frac{\alpha}{1+\alpha s}
+ =\sum_{k\ge0}(-s)^kp_{k+1},
+\]
+since the zeros of $((1+s)^q-1)/s$ are $s=\zeta-1=-1/\alpha$. This gives
+$p_0=q-1$ and
+\begin{gather*}
+ p_1=\frac{q-1}2,\qquad p_2=-\frac{(q-1)(q-5)}{12},\qquad p_3=-\frac{(q-1)(q-3)}8,\\
+ p_4=\frac{(q-1)(q^3+q^2-109q+251)}{720}.
+\end{gather*}
+Substituting the $p_k$ gives $(q-1)T/(4320q^4)$ for the sum over $\zeta\ne1$.
+\end{proof}
+
+The expansion in this proof is mechanical. The script
+\texttt{codim4\_symbolic.py} carries it out symbolically in $q$ and $d$, and
+\texttt{rows.py} compares~\eqref{eq:codim4} with the $h^*$-polynomial for
+$5\le d\le20$ and $1\le q\le35$.
+
+\begin{proof}[Proof of Theorem~\ref{thm:codim4}]
+Let $d\ge6$ and $D=(5d-3)/2$, and write $X=6(1+q)^dP+(q-1)T$, which has the
+sign of $A_{d,4}$. Since $d+5\binom d2=d(5d-3)/2=dD$, we have
+\[
+ P=-dq^2(q-D)+4dq-1.
+\]
+If $q\le D$ then $P\ge4dq-1\ge3dq$. If $q>D$ then $q-D\ge\frac12$, because
+$2q$ and $5d-3$ are integers, and $q\ge14$ because $D\ge27/2$; hence
+$P\le-\frac12dq^2+4dq-1\le-3dq$. In both cases $|P|\ge3dq$ and $P$ has the
+sign claimed for $A_{d,4}$. It remains to show $|(q-1)T|<6(1+q)^d|P|$.
+
+Bounding each coefficient of $T$ by its absolute value, with $d\ge1$ and
+$q\ge1$, gives $|(q-1)T|\le219\,d^3q^7$.
+
+\emph{Case $d\ge12$.} The function $q^6/(1+q)^d$ is decreasing for $q\ge1$,
+since $6(1+q)\le dq$. Hence
+\[
+ \frac{|(q-1)T|}{6(1+q)^d\cdot dq}\le\frac{219}{6}\,d^2\,\frac{q^6}{(1+q)^d}
+ \le\frac{219}{6}\cdot\frac{d^2}{2^d}\le\frac{219}{6}\cdot\frac{144}{4096}<3,
+\]
+using that $d^2/2^d$ decreases for $d\ge3$. So $|(q-1)T|<6(1+q)^d\cdot3dq\le6(1+q)^d|P|$.
+
+\emph{Case $6\le d\le11$ and $q\ge100d$.} Here $q>D$ and $q-D\ge q-\frac52d\ge
+\frac{39}{40}q$, so $|P|\ge\frac{39}{40}dq^3-4dq\ge\frac12dq^3$. Since
+$(1+q)^d\ge q^6$,
+\[
+ \frac{|(q-1)T|}{6(1+q)^d}\le\frac{219}{6}d^3q<\frac12dq^3\le|P|,
+\]
+because $q^2\ge10^4d^2>73d^2$.
+
+\emph{Case $6\le d\le11$ and $q<100d$.} These are finitely many pairs, and
+for each of them \texttt{rows.py} evaluates $X$ exactly and confirms its sign.
+
+For $d\le5$ the coefficients can be listed. From~\eqref{eq:conv}, as
+polynomials in $r$, the numbers $d!\,[t^k]L_d(t)$ for $0<k<d$ are
+\begin{align*}
+ d=2:&\quad r+2;\\
+ d=3:&\quad \tfrac12(3r^2+r+18),\quad \tfrac32(r^2+r+2);\\
+ d=4:&\quad 2(2r^2+r+22),\quad 4r^3+5r^2+2r+24,\quad 2(r^3+r^2+r+2);\\
+ d=5:&\quad \tfrac16(-5r^4+60r^3+65r^2+24r+1500),\quad \tfrac{25}2(r^3+2r^2+r+14),\\
+ &\quad \tfrac53(5r^4+6r^3+7r^2+3r+30),\quad \tfrac52(r^4+r^3+r^2+r+2).
+\end{align*}
+The constant term is $1$ and the leading coefficient is $r^d/d!$. Each of
+these polynomials has degree at most $d$ in $r$, so the identities follow
+from their values at $d+1$ bases, which \texttt{rows.py} checks. All of them
+are positive except the linear coefficient for $d=5$. The polynomial
+$g(r)=-5r^4+60r^3+65r^2+24r+1500$ has exactly one positive zero by
+Descartes' rule of signs, and $g(13)>0>g(14)$.
+\end{proof}
+
+\section{Fixed codimension: proof of Theorem~\ref{thm:fixed}}\label{sec:fixed}
+
+Write $U=\frac vqa_1$ and $G=v(a_1+b)/r$, so the principal term of
+Lemma~\ref{lem:residue} is $r^d[v^\ell]UG^d$. With $f(x)=x/(1-e^{-x})$ we have
+$va_1=qf(v/q)$ and $f(x)=x/2+(x/2)\coth(x/2)$. Since $(x/2)\coth(x/2)$ is even,
+\[
+ U=\frac{v}{2q}+\Bigl(\text{even series}\Bigr),\qquad
+ va_1+vb=q+\frac v2+\frac{v}{e^v-1}+O(q^{-1})=q+\frac v2\coth\frac v2+O(q^{-1})
+\]
+coefficientwise, where the $O(q^{-1})$ is uniform in each fixed coefficient.
+The function $G$ is even, because $a_1(-v)=1-a_1(v)$ and $b(-v)=-1-b(v)$.
+Its constant term is $1$ and its coefficient of $v^2$ is $1/(12q)$.
+
+\emph{Nonprincipal roots.} Let $\zeta\ne1$ and $\alpha=1/(1-\zeta)$, so
+$|\alpha|\le q/4$ because $|1-\zeta|\ge2\sin(\pi/q)\ge4/q$. Writing $s=v/q$,
+\[
+ a_\zeta=\frac{\alpha e^s}{1+\alpha(e^s-1)}=\alpha e^s\sum_{j\ge0}(-\alpha)^j(e^s-1)^j,
+\]
+so the coefficient of $v^k$ in $\frac vqa_\zeta$ is a polynomial in $\alpha$ of
+degree at most $k$ divided by $q^k$, hence $O_k(1)$, and the coefficient of
+$v^k$ in $v(a_\zeta+b)-1$ is $O_k(q)$. Expanding the $d$th power, each
+nonprincipal term of Lemma~\ref{lem:residue} has absolute value at most
+$C_\ell(qd)^\ell$, and their sum at most $C_\ell\,q\,(qd)^\ell$, with $C_\ell$
+depending only on $\ell$.
+
+\emph{Part (1).} With $r/d\to c$, the nonprincipal contribution to
+$r^{-d}A_{d,\ell}$ is $O(r^{-d}q^{\ell+1}d^\ell)\to0$. For the principal one,
+$U\to1$ and
+\[
+ d\log G=\frac dr\Bigl(\frac v2\coth\frac v2-1\Bigr)+O\Bigl(\frac d{r^2}\Bigr)
+ \longrightarrow\frac1c\Bigl(\frac v2\coth\frac v2-1\Bigr)
+\]
+coefficientwise, which proves the first claim. The limit is even in $v$, so its
+odd coefficients vanish. For odd $\ell$, $[v^\ell]UG^d=\frac1{2q}[v^{\ell-1}]G^d$
+because $G$ and $U-v/(2q)$ are even, and $r/(2q)\to\frac12$. The
+nonprincipal contribution to $r^{1-d}A_{d,\ell}$ is still $O(r^{1-d}q^{\ell+1}d^\ell)\to0$.
+
+\emph{Part (2).} Fix $r$. For $\ell=2j$, the coefficient $[v^{2j}]G^d$ is a
+polynomial in $d$ of degree $j$ with leading term $\binom dj(12q)^{-j}$: to
+reach degree $j$ in $d$, each of $j$ factors must contribute $v^2$. Since $U$
+has constant term $1$, $[v^\ell]UG^d$ is a polynomial in $d$ with positive
+leading coefficient. For $\ell=2j+1$, $[v^\ell]UG^d=\frac1{2q}[v^{2j}]G^d$ has
+the same property. So the principal term is $r^d$ times a polynomial in $d$
+with positive leading coefficient, while the nonprincipal terms are bounded by
+a polynomial in $d$ ($q$ being fixed). Hence $A_{d,\ell}>0$ for large $d$. \qed
+
+\section{Bases two and three}\label{sec:23}
+
+Summing~\eqref{eq:gf} over $d$ with a new variable $z$ gives
+\begin{equation}\label{eq:sumd}
+ \sum_{d\ge0}L_d(t)z^d=[x^{qt}]\,\frac{1}{1-x}\cdot\frac{1}{1-zS_q(x)/(1-x^q)}
+ =[x^{qt}]\,\frac{S_{q-1}(x)}{1-x^q-zS_q(x)},
+\end{equation}
+as formal power series in $z$. For each $d$, both sides at $z^d$ are
+polynomials in $t$ that agree at integers $t\ge0$.
+
+\begin{theorem}\label{thm:23}
+For $r=2$ and $r=3$, every coefficient of $L_d(t)$ is positive for every $d\ge1$.
+\end{theorem}
+
+\begin{proof}
+\emph{The case $q=1$.} Then~\eqref{eq:sumd} is
+$[x^t]\,1/((1-z)-x(1+z))$, so
+\[
+ \sum_{d\ge0}L_d(t)z^d=\frac1{1-z}\Bigl(\frac{1+z}{1-z}\Bigr)^t
+ =\frac1{1-z}\exp\bigl(t\lambda(z)\bigr),\qquad
+ \lambda(z)=\log\frac{1+z}{1-z}=2\sum_{m\ge0}\frac{z^{2m+1}}{2m+1}.
+\]
+Therefore $k!\,[t^kz^d]=[z^d](1-z)^{-1}\lambda(z)^k$. The series
+$\lambda^k$ has nonnegative coefficients and the coefficient $2^k$ at $z^k$,
+and $(1-z)^{-1}$ has all coefficients equal to $1$. So the coefficient is
+positive for $0\le k\le d$.
+
+\emph{The case $q=2$.} Now~\eqref{eq:sumd} is $[x^{2t}]\,(1+x)/(1-x^2-z(1+x+x^2))$.
+The denominator is $-(1+z)(x-x_+)(x-x_-)$ with
+$x_\pm=(-z\pm\sqrt{4-3z^2})/(2(1+z))$, and $x_\pm(0)=\pm1$. Partial
+fractions give
+\[
+ \sum_{d\ge0}L_d(t)z^d=b_+(z)e^{t\lambda_+(z)}+b_-(z)e^{t\lambda_-(z)},\qquad
+ \lambda_\pm=-2\log(\pm x_\pm),
+\]
+where, after simplification,
+\[
+ b_\pm=\frac{1}{2(1-z)}\Bigl(1\pm\frac{2-z}{\sqrt{4-3z^2}}\Bigr),\qquad
+ \lambda_\pm'=\frac{2}{1-z^2}\Bigl(1\pm\frac1{\sqrt{4-3z^2}}\Bigr),\qquad \lambda_\pm(0)=0.
+\]
+As in the case $q=1$, the identity holds for integers $t\ge0$ at each power of
+$z$ and hence as polynomials in $t$.
+
+Let $a_i=[z^{2i}](4-3z^2)^{-1/2}=\frac12\binom{2i}{i}(3/16)^i>0$. Then
+$\sum_ia_i=1$ (evaluate at $z=1$), and $a_{i+1}/a_i=\frac{3(2i+1)}{8(i+1)}$,
+which is at least $\frac9{16}$ for $i\ge1$. Both $1+(4-3z^2)^{-1/2}$ and
+$1-(4-3z^2)^{-1/2}=\frac12-\sum_{i\ge1}a_iz^{2i}$ times $(1-z^2)^{-1}$ have
+nonnegative coefficients: the coefficient of $z^{2m}$ in the second product is
+$1-\sum_{i\le m}a_i\ge0$. Hence $\lambda_+$ and $\lambda_-$ have nonnegative
+coefficients and $[z]\lambda_+=3$.
+
+For $b_+$, write $\frac{2-z}{1-z}=1+\frac1{1-z}$. Then
+$2b_+=\frac1{1-z}+\bigl(1+\frac1{1-z}\bigr)(4-3z^2)^{-1/2}$ has positive
+coefficients. For $b_-$, the series $2(1-z)b_-=1-(2-z)(4-3z^2)^{-1/2}$ has coefficients are
+$1-2a_0=0$ at $z^0$, $a_m$ at odd degree $2m+1$, and $-2a_m$ at even degree
+$2m\ge2$. Dividing by $1-z$ takes partial sums. The partial sum through
+degree $2m+1$ is $1-2\sum_{i\le m}a_i+\sum_{i\le m}a_i=1-\sum_{i\le m}a_i\ge0$,
+and through degree $2m$ it is $1-\sum_{i\le m}a_i-a_m=\sum_{i>m}a_i-a_m$.
+This is $0$ for $m=0$. For $m\ge1$ the ratio bound gives
+$\sum_{i>m}a_i\ge a_m\sum_{j\ge1}(9/16)^j=\frac97a_m>a_m$. So $b_-$ has
+nonnegative coefficients.
+
+Now $k!\,[t^kz^d]$ of the sum equals
+$[z^d]\,b_+\lambda_+^k+[z^d]\,b_-\lambda_-^k$. The second term is
+nonnegative. In the first, $\lambda_+^k$ has nonnegative coefficients and
+$3^k$ at $z^k$, and $b_+$ has positive coefficients, so it is positive for
+$k\le d$.
+\end{proof}
+
+\section{Bases four and five}\label{sec:45}
+
+\begin{theorem}\label{thm:45}
+For $r=4$ and $r=5$, every coefficient of $L_d(t)$ is positive for every $d\ge1$.
+\end{theorem}
+
+Throughout this section $q\in\{3,4\}$.
+
+\subsection{Branches}
+For each $q$th root of unity $\zeta$, let $x_\zeta(z)$ be the root of
+$1-x^q-zS_q(x)=0$ with $x_\zeta(0)=\zeta$. It is a power series in $z$,
+because the roots are simple at $z=0$. Partial fractions
+in~\eqref{eq:sumd}, with $[x^n](x-x_\zeta)^{-1}=-x_\zeta^{-n-1}$, give
+\begin{equation}\label{eq:branches}
+ \sum_{d\ge0}L_d(t)z^d=\sum_{\zeta^q=1}b_\zeta(z)e^{tv_\zeta(z)},\qquad
+ v_\zeta=-q\log\frac{x_\zeta}{\zeta},\qquad
+ b_\zeta=-\frac{z\,x_\zeta'}{x_\zeta(1-x_\zeta)}.
+\end{equation}
+For $b_\zeta$ we used the root equation in the form
+$S_{q-1}(x_\zeta)=zS_q(x_\zeta)/(1-x_\zeta)$ and implicit differentiation,
+$\partial_x(1-x^q-zS_q)\cdot x_\zeta'=S_q(x_\zeta)$. As before, the identity
+holds as polynomials in $t$ at each power of $z$. From $x_1=1-\frac{q+1}{q}z+O(z^2)$
+we get $b_1(0)=1$ and $[z]v_1=q+1$; for $\zeta\ne1$, $b_\zeta(0)=v_\zeta(0)=0$.
+Consequently
+\begin{equation}\label{eq:tk}
+ k!\,[t^kz^d]\sum_{d}L_d(t)z^d=\sum_{\zeta^q=1}[z^d]\,b_\zeta v_\zeta^k .
+\end{equation}
+The plan is to show that the term $\zeta=1$ dominates.
+
+Replacing $x$ by $1/x$ and $z$ by $-z$ preserves the root equation, so
+$x_1(-z)=1/x_1(z)$ and $v_1$ is odd.
+
+\subsection{Coefficients by Lagrange inversion}
+Write $x_\zeta=\zeta(1-y)$. The root equation becomes $y=z\phi(y)$ with
+\[
+ \phi(y)=S_q\bigl(\zeta(1-y)\bigr)\cdot\frac{y}{1-(1-y)^q}.
+\]
+Since $zy'=y/(1-z\phi'(y))$, Lagrange inversion gives
+$[z^n]\,zy'\,H(y)=[y^{n-1}]H(y)\phi(y)^n$ for every power series $H$ and
+$n\ge1$. With $v_\zeta=-q\log(1-y)$,
+$b_\zeta=zy'/((1-y)(1-\zeta+\zeta y))$ for $\zeta\ne1$, and
+$b_1=1+z\frac{d}{dz}\log\frac{\phi(y)}{1-y}$ (because $y/z=\phi(y)$), we get
+for $n\ge1$
+\begin{equation}\label{eq:lagrange}
+ [z^n]v_\zeta=\frac qn[y^{n-1}]\frac{\phi^n}{1-y},\qquad
+ [z^n]b_1=[y^n]\frac{\phi^n}{1-y},\qquad
+ [z^n]b_\zeta=[y^{n-1}]\frac{\phi^n}{(1-y)(1-\zeta+\zeta y)}\ (\zeta\ne1).
+\end{equation}
+For $b_1$ the term $\phi'/\phi$ contributes $[y^{n-1}]\phi'\phi^{n-1}=[y^n]\phi^n$.
+
+To compute exactly, substitute $y=qu$ and let $A(u)=S_q(\zeta(1-qu))$,
+$B(u)=(1-(1-qu)^q)/(qu)$ and $F=(qA/B)^n=q^n\phi^n$. The coefficients of $F$
+follow from $F(0)=A(0)^n$ and the linear recurrence encoded in
+\[
+ A\,B\,F'=n\,(A'B-AB')\,F .
+\]
+With $C_j=[u^j]F/(1-qu)$, \eqref{eq:lagrange} becomes
+\[
+ [z^n]v_\zeta=\frac{q^2C_{n-1}}{nq^{2n}},\qquad [z^n]b_1=\frac{C_n}{q^{2n}},\qquad
+ [z^n]b_\zeta=\frac{\beta D_{n-1}}{q^{2n}}\ (\zeta\ne1),
+\]
+where $\beta=q/(1-\zeta)$, $D_{-1}=0$ and $D_j=C_j-\zeta\beta D_{j-1}$. All of
+these lie in $\Z[\zeta]$ (Gaussian or Eisenstein integers, or $\Z$). The
+script \texttt{bases\_4\_5.py} carries out the recurrence exactly, checking
+divisibility at each step, for one branch from each conjugate pair. It also
+checks that~\eqref{eq:branches} reproduces $L_d(t)$ for $d\le12$.
+
+\begin{lemma}[finite certificate]\label{lem:finite}
+Let $N=180$ for $q=3$ and $N=900$ for $q=4$. For $1\le n\le N$:
+\begin{enumerate}
+\item $[z^n]b_1\ge\frac12$, and $[z^n]v_1>0$ for odd $n$;
+\item $|[z^n]b_\zeta|<\frac15$ for $\zeta\ne1$;
+\item $\sum_{n=1}^N|[z^n]v_\zeta|$ is less than $\frac74$ for $q=3$, $\zeta\ne1$;
+less than $\frac{12}5$ for $q=4$, $\zeta=\pm i$; and less than $\frac54$ for
+$q=4$, $\zeta=-1$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+This is an exact computation with the formulas above. Upper bounds for
+absolute values use the norm form of $\Z[\zeta]$ and integer square roots,
+rounded up to multiples of $10^{-9}$. The computed values are
+$\min_n[z^n]b_1\approx0.667$ and $0.625$, $\max|[z^n]b_\zeta|\approx0.193$ ($q=3$)
+and $0.177$, $0.125$ ($q=4$, $\zeta=i,-1$), and the sums in (3) are about
+$1.716$, $2.356$ and $1.210$.
+\end{proof}
+
+\subsection{Analytic continuation}
+We need the branches on a disk $|z|\le R$ with $R=9/8$ for $q=3$ and
+$R=51/50$ for $q=4$. Put $x=(1-w)/(1+w)$. The inverse function
+$z=(1-x^q)/S_q(x)$ becomes
+\[
+ z=\frac{w(3+w^2)}{2(1+w^2)}\quad(q=3),\qquad
+ z=\frac{8w(1+w^2)}{5+10w^2+w^4}\quad(q=4).
+\]
+The critical points satisfy $w^4+3=0$ for $q=3$, and $u^3-7u^2-5u-5=0$ with
+$u=w^2$ for $q=4$.
+
+For $q=3$, $w^2=\pm i\sqrt3$ gives $|3+w^2|^2=12$ and $|1+w^2|^2=4$, so the
+critical values have modulus $3^{3/4}/2$, and $(3^{3/4}/2)^4=27/16>(9/8)^4$.
+
+For $q=4$, the cubic has one real zero $U\in(7.73045,7.73047)$; it has no
+zero $u\le0$ since $u^3\le0<7u^2+5u+5$ there. The two other zeros are
+$a\pm ib$ with $2a+U=7$ and $(a^2+b^2)U=5$, so $a\in(-0.37,-0.36)$. The
+squared modulus of a critical value is $64|u|\,|1+u|^2/|5+10u+u^2|^2$. At
+$u=U$ this exceeds $1.36^2$. At $u=a\pm ib$, with $m=a^2+b^2$, it equals
+\[
+ \frac{64\sqrt m\,(1+2a+m)}{(5+10a+2a^2-m)^2+(10+2a)^2(m-a^2)}>\frac{47.15}{45.06}>\Bigl(\frac{51}{50}\Bigr)^2,
+\]
+by interval bounds from the bracket for $U$ (script \texttt{disks.py}).
+
+The map is also locally injective at its poles, which are simple, and at
+$w=\infty$ (use the coordinate $1/w$: for $q=3$ the point $w=\infty$ is a
+simple pole, and for $q=4$ it is a simple zero). So no critical value
+lies in the closed disk $|z|\le R$, and each branch $x_\zeta$ extends
+meromorphically to a neighborhood of it. A root $x$ of $1-x^q-zS_q(x)$ can
+be $0$ only when $z=1$, can be $\infty$ only when $z=-1$ (where the leading
+coefficient $-(1+z)$ vanishes), and can be $1$ only when $z=0$. The value $0$
+is taken by $x_1$ at $z=1$: along $w\in[0,1]$ the map increases from $0$ to $1$
+without critical points, and $x$ goes from $1$ to $0$. By $x_1(-z)=1/x_1(z)$, the
+pole at $z=-1$ is also on $x_1$. These are simple. So on the disk the
+functions $x_\zeta$ for $\zeta\ne1$ are holomorphic and avoid $0$, $1$
+and~$\infty$.
+
+\subsection{Tail bounds}
+On $|z|\le R$ define the holomorphic logarithms, vanishing at $z=0$,
+\begin{align*}
+ V_1&=-q\log\Bigl(x_1\frac{1+z}{1-z}\Bigr), &
+ W_1&=\log\Bigl(\frac{x_1}{1-x_1}\cdot\frac{z}{1-z}\cdot\frac{q+1}{q}\Bigr),\\
+ V_\zeta&=v_\zeta, &
+ W_\zeta&=\log\Bigl(\frac{x_\zeta}{1-x_\zeta}\Big/\frac{\zeta}{1-\zeta}\Bigr)\quad(\zeta\ne1).
+\end{align*}
+Their arguments are holomorphic and zero-free on the disk: the zero of $x_1$
+at $z=1$ cancels against $1-z$, the pole at $z=-1$ against $1+z$ or $1-x_1$,
+and the zero of $1-x_1$ at $z=0$ against $z$. Then
+\begin{equation}\label{eq:VW}
+ v_1=q\log\frac{1+z}{1-z}+V_1,\qquad b_1=\frac1{1-z}-zW_1',\qquad b_\zeta=-zW_\zeta'\ (\zeta\ne1).
+\end{equation}
+
+\begin{lemma}\label{lem:tail}
+For $n\ge1$, $|[z^n]V_\zeta|\le100R^{-n}$ and $|[z^n]W_\zeta|\le100R^{-n}$ for every $\zeta$.
+\end{lemma}
+
+\begin{proof}
+Let $|z|=R$. After dividing $1-x^q-zS_q(x)$ by its leading coefficient
+$-(1+z)$, the other coefficients have modulus at most
+$\max(|z|,|1-z|)/|1+z|\le(1+R)/(R-1)\le101$, and the same holds for the
+reversed polynomial, divided by $1-z$. Cauchy's bound gives
+$1/150\le|x_\zeta|\le150$. Evaluating at $x=1$ gives
+$\prod_\zeta(1-x_\zeta)=(q+1)z/(1+z)$, so
+$\prod_\zeta|1-x_\zeta|\ge(q+1)R/(1+R)\ge1$; together with
+$|1-x_\zeta|\le151$ this gives $|1-x_\zeta|\ge151^{-3}>10^{-7}$. Also
+$1/50\le|1\pm z|\le17/8$, and $\sqrt2\le|1-\zeta|\le2$ for $\zeta\ne1$.
+Taking logarithms of moduli, $|\operatorname{Re}V_\zeta|\le50$ and
+$|\operatorname{Re}W_\zeta|\le50$ on the circle. For a function $f$
+holomorphic on $|z|\le R$ with $f(0)=0$, the $n$th Fourier coefficient of
+$\operatorname{Re}f(Re^{i\theta})$ is $\frac12R^n[z^n]f$, so
+$|[z^n]f|\le2R^{-n}\max|\operatorname{Re}f|\le100R^{-n}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:45}]
+For $n>N$, $100nR^{-n}<\frac1{100}$ and $\sum_{n>N}100R^{-n}<\frac1{100}$;
+both are checked with rational arithmetic at $n=N+1$, and $100nR^{-n}$
+decreases for $n\ge N$. By~\eqref{eq:VW} and Lemma~\ref{lem:tail}, for $n>N$:
+$[z^n]b_1\ge1-100nR^{-n}>\frac12$; for odd $n$,
+$[z^n]v_1\ge\frac{2q}n-100R^{-n}>0$; for even $n$, $[z^n]v_1=0$ since $v_1$
+is odd; and $|[z^n]b_\zeta|\le100nR^{-n}<\frac1{100}$ for $\zeta\ne1$. With
+Lemma~\ref{lem:finite}, every coefficient of $b_1$ is at least $\frac12$, every
+coefficient of $v_1$ is nonnegative, $|[z^n]b_\zeta|<\frac14$ for all $n$ and
+$\zeta\ne1$, and
+\[
+ \sum_{n\ge1}|[z^n]v_\zeta|<\begin{cases}2,&q=3,\\ \frac52,&q=4.\end{cases}
+\]
+
+Let $1\le k\le d$. Since $b_1$ and $v_1$ have nonnegative coefficients and
+$[z]v_1=q+1$,
+\[
+ [z^d]\,b_1v_1^k\ge[z^{d-k}]b_1\cdot(q+1)^k\ge\tfrac12(q+1)^k.
+\]
+For $\zeta\ne1$, $v_\zeta(0)=0$, so
+$|[z^d]b_\zeta v_\zeta^k|\le\frac14\bigl(\sum_n|[z^n]v_\zeta|\bigr)^k$. Summing over
+the $q-1$ nonprincipal roots, their total is less than $\frac12\cdot2^k$ for
+$q=3$ and $\frac34(\frac52)^k$ for $q=4$. Both are smaller than
+$\frac12(q+1)^k$, which is $\frac12\cdot4^k$ or $\frac12\cdot5^k$. By~\eqref{eq:tk},
+$[t^k]L_d(t)>0$. Finally $[t^0]L_d=L_d(0)=1$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:classification}}\label{sec:classification}
+
+Theorems~\ref{thm:23} and~\ref{thm:45} give positivity in every dimension for
+$r=2,3,4,5$. By Theorem~\ref{thm:codim4}, every $B_{r,d}$ with $d\le4$ is
+Ehrhart positive, and for $r\ge14$ the linear coefficient of $L_5$ is
+negative while the others are positive. For $6\le r\le13$, the script
+\texttt{rows.py} computes $L_d(t)$ exactly from the $h^*$-polynomial for every
+$d$ up to the entry of Table~\ref{tab:first}. All coefficients are positive
+below that dimension, and at that dimension the linear coefficient, and only
+it, is negative. \qed
+
+Table~\ref{tab:first} records the first failure only, not the set of all
+dimensions in which positivity fails for a given base.
+
+\section*{Verification code}
+
+The repository \url{https://github.com/brandonlign/base-r-ehrhart} contains
+the scripts named above. All except \texttt{codim4\_symbolic.py} use only the
+Python standard library and exact integer or rational arithmetic;
+\texttt{run\_all.sh} runs them in about fifteen seconds.
+\begin{itemize}
+\item \texttt{ehrhart.py}: $L_d(t)$ from the $h^*$-polynomial~\cite{Sol}, from
+the convolution~\eqref{eq:conv}, and by direct lattice-point counts, compared
+on 447 values, including Graham's $L_5$ for $r=14$.
+\item \texttt{rows.py}: the signs in Theorem~\ref{thm:large} for $d\le16$, the
+formula~\eqref{eq:codim4} for $5\le d\le20$, $q\le35$, the finite rows of
+Theorem~\ref{thm:codim4}, the formulas for $d\le5$, Table~\ref{tab:first}, and
+the coefficient $(5-2c)/(1440c^2)$.
+\item \texttt{bases\_2\_3.py}: the generating functions of Section~\ref{sec:23}
+for $d\le14$ and the coefficient facts used there through degree $200$.
+\item \texttt{bases\_4\_5.py}: Lemma~\ref{lem:finite}, the tail inequalities,
+and the identity~\eqref{eq:branches} for $d\le12$.
+\item \texttt{disks.py}: the maps in $w$ and the critical-value bounds.
+\item \texttt{codim4\_symbolic.py} (needs \texttt{sympy}, a few minutes): the
+expansion in the proof of Proposition~\ref{prop:codim4}, symbolically in $q$
+and $d$.
+\end{itemize}
+
+\section*{Acknowledgments}
+OpenAI Researcher and Claude (Anthropic) helped with the proofs, the
+verification code, and the manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{BCKV}
+D.~Bump, K.-K.~Choi, P.~Kurlberg and J.~Vaaler, \emph{A local Riemann
+hypothesis, I}, Math. Z. \textbf{233} (2000), 1--19.
+
+\bibitem{Gra}
+P.~Graham, \emph{A base-$r$ simplex that is not Ehrhart positive},
+Hexagon 2611.00793v1 (21 November 2026),
+\url{https://hexagonmath.org/2611.00793v1};
+\href{https://doi.org/10.5281/zenodo.23875145}{doi:10.5281/zenodo.23875145}.
+
+\bibitem{Liu}
+F.~Liu, \emph{On positivity of Ehrhart polynomials}, in: Recent Trends in
+Algebraic Combinatorics, Assoc. Women Math. Ser.~16, Springer, 2019,
+189--237; \href{https://arxiv.org/abs/1711.09962}{arXiv:1711.09962}.
+
+\bibitem{LS}
+F.~Liu and L.~Solus, \emph{On the relationship between Ehrhart unimodality
+and Ehrhart positivity}, Ann. Comb. \textbf{23} (2019), 347--365;
+\href{https://arxiv.org/abs/1804.08258}{arXiv:1804.08258}.
+
+\bibitem{Sol}
+L.~Solus, \emph{Simplices for numeral systems}, Trans. Amer. Math. Soc.
+\textbf{371} (2019), 2089--2107;
+\href{https://arxiv.org/abs/1706.00480}{arXiv:1706.00480}.
+
+\end{thebibliography}
+
+\end{document}

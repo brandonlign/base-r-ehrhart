@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "Please cite the paper when using the result or verification code."
+title: "Ehrhart positivity of base-r simplices"
+type: software
+authors:
+  - family-names: Li
+    given-names: Brandon
+    email: brandon.li.gn@gmail.com
+    affiliation: "Great Neck, New York, USA"
+repository-code: "https://github.com/brandonlign/base-r-ehrhart"
+license: MIT
+keywords:
+  - Ehrhart polynomial
+  - Ehrhart positivity
+  - lattice simplex
+  - numeral system
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Li
+      given-names: Brandon
+  title: "Ehrhart positivity of base-r simplices"
+  year: 2026
