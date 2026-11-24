@@ -3,7 +3,7 @@ h*-recurrence, convolution formula and direct lattice-point counts agree (447 va
 L_5(t) for r = 14: 1 - 268/15 t + 3955/12 t^2 + 5833/2 t^3 + 10343/12 t^4 + 67228/15 t^5
 == rows.py
 Theorem 1.2: eventual signs of all coefficients, d <= 16: ok
-Proposition 4.1 and Theorem 1.3: closed form matches 560 values; rows 6 <= d <= 11, q < 100d have the stated sign; |(q-1)T| <= 224 d^3 q^7: ok
+Proposition 4.1 and Theorem 1.3: closed form matches 595 values; rows 6 <= d <= 11, q < 100d have the stated sign; |(q-1)T| <= 224 d^3 q^7: ok
 low-dimensional formulas (d <= 5) and the sign change of [t] L_5 between r = 13 and 14: ok
 first-failure table for r = 6..14: ok
 fourth coefficient of the limiting exponential is (5 - 2c)/(1440 c^2): ok

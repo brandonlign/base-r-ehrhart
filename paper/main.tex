@@ -310,7 +310,7 @@ To locate the exact sign change in codimension four, we first derive a
 closed-form expression for the rescaled coefficient.
 
 \begin{proposition}\label{prop:codim4}
-For all $d\ge1$ and $q\ge1$,
+For all $d\ge4$ and $q\ge1$,
 \begin{equation}\label{eq:codim4}
  4320\,q^4A_{d,4}=6(1+q)^dP+(q-1)T,
 \end{equation}
@@ -361,7 +361,7 @@ $\zeta\ne1$, completing the proof.
 The algebraic expansion in this proof is routine. The script
 \texttt{codim4\_symbolic.py} verifies it symbolically in $q$ and $d$, and
 \texttt{rows.py} checks~\eqref{eq:codim4} against the $h^*$-polynomial for all
-$5\le d\le20$ and $1\le q\le35$.
+$4\le d\le20$ and $1\le q\le35$.
 
 \begin{proof}[Proof of Theorem~\ref{thm:codim4}]
 First assume $d\ge6$, and set $D=(5d-3)/2$. Write $X=6(1+q)^dP+(q-1)T$, which
@@ -776,7 +776,7 @@ $h^*$-polynomial~\cite{Sol}, from the convolution~\eqref{eq:conv}, and by
 direct lattice-point counts, comparing them on 447 values, including Graham's
 $L_5$ for $r=14$.
 \item \texttt{rows.py}: verifies the signs in Theorem~\ref{thm:large} for
-$d\le16$, the formula~\eqref{eq:codim4} for $5\le d\le20$ and $q\le35$, the
+$d\le16$, the formula~\eqref{eq:codim4} for $4\le d\le20$ and $q\le35$, the
 finite cases of Theorem~\ref{thm:codim4} and the constant $224$ in its proof,
 the formulas for $d\le5$,
 Table~\ref{tab:first}, and the coefficient $(5-2c)/(1440c^2)$.

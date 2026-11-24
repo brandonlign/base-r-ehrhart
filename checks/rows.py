@@ -4,7 +4,7 @@
    in q of degree <= d (recovered by exact interpolation at q = 1..d+1 and confirmed
    at q = d+2, d+3); its leading term has the sign stated in the theorem.
 2. Proposition 4.1 and Theorem 1.3 (codimension four): the closed form 4320 q^4 A_(d,4) = 6 (1+q)^d P + (q-1) T
-   agrees with the h*-polynomial for 5 <= d <= 20 and 1 <= q <= 35, and the finite
+   agrees with the h*-polynomial for 4 <= d <= 20 and 1 <= q <= 35, and the finite
    rows 6 <= d <= 11, 1 <= q < 100 d have the claimed sign.
 3. The low-dimensional formulas of Section 4 (as polynomials in r, checked at d+1 bases).
 4. The first-failure table: for each base r in 6..14 and every d below the listed
@@ -60,7 +60,7 @@ def closed_form(d, q):
 
 
 count = 0
-for d in range(5, 21):
+for d in range(4, 21):
     for q in range(1, 36):
         # A_(d,4) = (d-4)! [t^(d-4)] L_d and ehr gives d! [t^k] L_d
         assert ehr(d, q + 1)[d - 4] * factorial(d - 4) * 4320 * q ** 4 == factorial(d) * closed_form(d, q), (d, q)
@@ -72,7 +72,7 @@ for d in range(6, 12):
 T_terms = {(6, 3): 1, (6, 2): -3, (6, 1): 2, (5, 3): 1, (5, 2): -12, (5, 1): 11, (4, 3): -19, (4, 2): 18, (4, 1): 19,
            (3, 3): 26, (3, 2): 18, (3, 1): 4, (3, 0): -6, (2, 2): 36, (2, 1): 12, (2, 0): -6, (1, 1): 18, (1, 0): -6,
            (0, 0): -6}
-for d in range(5, 21):
+for d in range(4, 21):
     for q in range(1, 36):
         T = sum(c * q ** i * d ** j for (i, j), c in T_terms.items())
         assert 6 * (1 + q) ** d * (-1 + 4 * d * q + (d + 5 * (d * (d - 1) // 2)) * q * q - d * q ** 3) + (q - 1) * T \
